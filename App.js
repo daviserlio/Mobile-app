@@ -19,7 +19,7 @@ export default function App() {
         source={require('./assets/product-3.png')} 
         style={styles.imagem}
       />
-      <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+      <Text style={styles.texto}>Esta é a descrição<br></br> da imagem.</Text>
     </View>
   );
 }
