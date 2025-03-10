@@ -1,37 +1,62 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Produtos!</Text>
-      <View style={styles.productContainer}>
-        <View style={styles.box}>
-          <Image
-            source={require('./assets/product-2.png')}
-            style={styles.imagem}
-          />
-          <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
-        </View>
+      <View style={styles.header}>
+        <Text style={styles.title}>Produtos!</Text>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Pesquisar..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
       </View>
-      <View style={styles.productContainer}>
-        <View style={styles.box}>
-          <Image
-            source={require('./assets/product-1.png')} 
-            style={styles.imagem}
-          />
-          <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+      
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.productContainer}>
+          <View style={styles.box}>
+            <Image
+              source={require('./assets/product-2.png')}
+              style={styles.imagem}
+            />
+            <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.productContainer}>
-        <View style={styles.box}>
-          <Image
-            source={require('./assets/product-3.png')} 
-            style={styles.imagem}
-          />
-          <Text style={styles.texto}>Esta é a descrição<br/>da imagem.</Text>
+        
+        <View style={styles.productContainer}>
+          <View style={styles.box}>
+            <Image
+              source={require('./assets/product-1.png')}
+              style={styles.imagem}
+            />
+            <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+          </View>
         </View>
-      </View>
+        
+        <View style={styles.productContainer}>
+          <View style={styles.box}>
+            <Image
+              source={require('./assets/product-3.png')}
+              style={styles.imagem}
+            />
+            <Text style={styles.texto}>Esta é a descrição<br />da imagem.</Text>
+          </View>
+        </View>
+        
+        <View style={styles.productContainer}>
+          <View style={styles.box}>
+            <Image
+              source={require('./assets/product-4.png')}
+              style={styles.imagem}
+            />
+            <Text style={styles.texto}>Esta é a descrição da nova imagem.</Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -43,13 +68,29 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Alinha os itens no centro horizontalmente
     padding: 20, // Adiciona espaço interno ao redor do contêiner
     backgroundColor: '#f0f0f0', // Define a cor de fundo como cinza claro
-    justifyContent: 'center' // Centraliza os itens verticalmente
+    justifyContent: 'flex-start' // Alinha os itens no início do contêiner
+  },
+  header: {
+    flexDirection: 'row', // Alinha os itens em linha
+    justifyContent: 'space-between', // Espaça os itens igualmente
+    alignItems: 'center', // Alinha os itens verticalmente ao centro
+    width: '100%', // Largura total do contêiner
+    marginBottom: 20, // Espaço abaixo do cabeçalho
   },
   title: {
-    alignSelf: 'flex-start', // Alinha o título à esquerda
     fontSize: 24, // Tamanho da fonte do título
     fontWeight: 'bold', // Deixa o texto em negrito
-    marginBottom: 20, // Espaço abaixo do título
+  },
+  searchInput: {
+    height: 40, // Altura da barra de pesquisa
+    borderColor: '#ccc', // Cor da borda
+    borderWidth: 1, // Largura da borda
+    borderRadius: 5, // Arredonda os cantos da barra de pesquisa
+    paddingHorizontal: 10, // Espaço interno horizontal
+    width: '40%', // Largura da barra de pesquisa
+  },
+  scrollView: {
+    width: '100%', // Garante que o ScrollView ocupe toda a largura
   },
   productContainer: {
     marginBottom: 20, // Espaço entre os produtos
