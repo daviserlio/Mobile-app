@@ -15,45 +15,54 @@ export default function App() {
           onChangeText={setSearchQuery}
         />
       </View>
-      
+
       <ScrollView style={styles.scrollView}>
         <View style={styles.productContainer}>
           <View style={styles.box}>
-            <Image
-              source={require('./assets/product-2.png')}
-              style={styles.imagem}
-            />
-            <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./assets/product-2.png')}
+                style={styles.imagem}
+              />
+              <Text style={styles.texto}>Notebook Dell Inspiron<br />R$ 3.899,00</Text>
+
+            </View>
           </View>
         </View>
-        
+
         <View style={styles.productContainer}>
           <View style={styles.box}>
-            <Image
-              source={require('./assets/product-1.png')}
-              style={styles.imagem}
-            />
-            <Text style={styles.texto}>Esta é a descrição da imagem.</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./assets/product-1.png')}
+                style={styles.imagem}
+              />
+              <Text style={styles.texto}>Notebook Gamer Acer Nitro V15<br />R$ 5.099,00</Text>
+            </View>
           </View>
         </View>
-        
+
         <View style={styles.productContainer}>
           <View style={styles.box}>
-            <Image
-              source={require('./assets/product-3.png')}
-              style={styles.imagem}
-            />
-            <Text style={styles.texto}>Esta é a descrição<br />da imagem.</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./assets/product-3.png')}
+                style={styles.imagem}
+              />
+              <Text style={styles.texto}>Notebook Gamer Dell G15<br />R$ 6.139,00</Text>
+            </View>
           </View>
         </View>
-        
+
         <View style={styles.productContainer}>
           <View style={styles.box}>
-            <Image
-              source={require('./assets/product-4.png')}
-              style={styles.imagem}
-            />
-            <Text style={styles.texto}>Esta é a descrição da nova imagem.</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./assets/product-4.png')}
+                style={styles.imagem}
+              />
+              <Text style={styles.texto}>Combo Gamer Eg54 Evolut Starter<br />R$ 104,27.</Text>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -107,13 +116,17 @@ const styles = StyleSheet.create({
     elevation: 5, // Elevação para Android (sombra)
     width: '100%', // Largura da caixa ocupa 100% do contêiner pai
   },
+  row: {
+    flexDirection: 'row', // Alinha a imagem e o texto em linha
+    alignItems: 'center', // Alinha verticalmente a imagem e o texto
+  },
   imagem: {
     width: 200, // Largura da imagem
     height: 200, // Altura da imagem
     borderRadius: 40, // Arredonda a imagem
   },
   texto: {
-    marginTop: 10, // Espaço entre a imagem e o texto
+    marginLeft: 10, // Espaço entre a imagem e o texto
     fontSize: 16, // Tamanho da fonte do texto
     color: '#333', // Cor do texto
   },
