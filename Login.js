@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
         color: '#ccc', // Define a cor do texto de "Forgot password?" como cinza claro
         textDecorationLine: 'underline', // Adiciona sublinhado ao texto de "Forgot password?"
     },
-});
+})
