@@ -40,14 +40,14 @@ export default function App() {
         ))}
       </View>
 
-      {/* Box do Banner */}
+      {/* Box do Banner */} 
+      <ScrollView style={styles.scrollView}>
       <View style={styles.bannerBox}>
         <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
         <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
       </View>
 
       {/* Lista de Produtos */}
-      <ScrollView style={styles.scrollView}>
         <View style={styles.productContainer}>
           <View style={styles.box}>
             <View style={styles.row}>
