@@ -213,6 +213,6 @@ const styles = StyleSheet.create({
   texto: {
     marginLeft: 10, // Adiciona um espaçamento à esquerda do texto
     fontSize: 16, // Tamanho da fonte
-    fontWeight: 'bold',
+    fontWeight: 'bold', // // Texto em negrito
   },
 });
