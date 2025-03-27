@@ -234,18 +234,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', // // Texto em negrito
   },
   buyButton: {
-    borderWidth: 2,
-    borderColor: '#FF6600',
-    borderRadius: 10,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    marginTop: 10,
-    alignItems: 'center',
-    backgroundColor: '#FF6600',
+    borderWidth: 2, // Define a largura da borda do botão
+    borderColor: '#FF6600', // Define a cor da borda do botão
+    borderRadius: 10, // Arredonda os cantos do botão com um raio
+    paddingVertical: 8, // Adiciona um espaçamento interno na parte superior e inferior
+    paddingHorizontal: 12, // Adiciona um espaçamento interno na lateral
+    marginTop: 10, // Adiciona uma margem superior para espaçar o botão de outros elementos acima dele.
+    alignItems: 'center', // Centraliza o conteúdo horizontalmente dentro do botão.
+    backgroundColor: '#FF6600', // Define a cor de fundo do botão
   },
   buyButtonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    color: '#FFFFFF', // Define a cor do texto 
+    fontWeight: 'bold', // Deixa o texto em negrito.
   },
 });
 
