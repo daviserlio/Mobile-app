@@ -54,6 +54,9 @@ export default function App() {
               <Image source={require('./assets/product-2.png')} style={styles.imagem} />
               <Text style={styles.texto}>Notebook Dell Inspiron{"\n"}R$ 3.899,00</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
 
@@ -63,6 +66,9 @@ export default function App() {
               <Image source={require('./assets/product-1.png')} style={styles.imagem} />
               <Text style={styles.texto}>Notebook Gamer Acer Nitro V15{"\n"}R$ 5.099,00</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
 
@@ -72,6 +78,9 @@ export default function App() {
               <Image source={require('./assets/product-3.png')} style={styles.imagem} />
               <Text style={styles.texto}>Notebook Gamer Dell G15{"\n"}R$ 6.139,00</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
 
@@ -81,6 +90,9 @@ export default function App() {
               <Image source={require('./assets/product-4.png')} style={styles.imagem} />
               <Text style={styles.texto}>Combo Gamer Eg54 Evolut Starter{"\n"}R$ 104,27</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
              
@@ -90,6 +102,9 @@ export default function App() {
               <Image source={require('./assets/product-11.png')} style={styles.imagem} />
               <Text style={styles.texto}>Xiaomi 12s Ultra{"\n"}R$ 2.312,00</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
         
@@ -99,6 +114,9 @@ export default function App() {
               <Image source={require('./assets/product-14.png')} style={styles.imagem} />
               <Text style={styles.texto}>Playstation 5 Slim{"\n"}R$ 3.423,00</Text>
             </View>
+            <TouchableOpacity style={styles.buyButton}>
+                <Text style={styles.buyButtonText}>Comprar</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -215,4 +233,19 @@ const styles = StyleSheet.create({
     fontSize: 16, // Tamanho da fonte
     fontWeight: 'bold', // // Texto em negrito
   },
+  buyButton: {
+    borderWidth: 2,
+    borderColor: '#FF6600',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginTop: 10,
+    alignItems: 'center',
+    backgroundColor: '#FF6600',
+  },
+  buyButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
 });
+
