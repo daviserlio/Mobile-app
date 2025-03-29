@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ProductDetails from './assets/ProductDetailsScreen';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+function HomeScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('TODOS');
 
+  {/* Lista de Produtos */}
+  const products = [
+    { name: 'Notebook Dell Inspiron', price: 'R$ 3.899,00', image: require('./assets/product-2.png') },
+    { name: 'Notebook Gamer Acer Nitro V15', price: 'R$ 5.099,00', image: require('./assets/product-1.png') },
+    { name: 'Notebook Gamer Dell G15', price: 'R$ 6.139,00', image: require('./assets/product-3.png') },
+    { name: 'Combo Gamer Eg54 Evolut Starter', price: 'R$ 104,27', image: require('./assets/product-4.png') },
+    { name: 'Xiaomi 12s Ultra', price: 'R$ 2.312,00', image: require('./assets/product-11.png') },
+    { name: 'Playstation 5 Slim', price: 'R$ 3.423,00', image: require('./assets/product-14.png') },
+  ];
+
   return (
+ 
+    /* Barra de Pesquisa */  
     <View style={styles.container}>
-      {/* Barra de Pesquisa */}
       <View style={styles.header}>
         <TextInput
           style={styles.searchInput}
@@ -40,89 +57,46 @@ export default function App() {
         ))}
       </View>
 
-      {/* Box do Banner */} 
-      <ScrollView style={styles.scrollView}>
+     {/* Box do Banner */} 
       <View style={styles.bannerBox}>
         <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
         <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
       </View>
 
-      {/* Lista de Produtos */}
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-2.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Notebook Dell Inspiron{"\n"}R$ 3.899,00</Text>
-            </View>
-            <TouchableOpacity style={styles.buyButton}>
+      <ScrollView style={styles.scrollView}>
+        {products.map((product, index) => (
+          <View key={index} style={styles.productContainer}>
+            <View style={styles.box}>
+              <View style={styles.row}>
+                <Image source={product.image} style={styles.imagem} />
+                <Text style={styles.texto}>{product.name}{"\n"}{product.price}</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.buyButton}
+                onPress={() => navigation.navigate('Detalhes', { product })}
+              >
                 <Text style={styles.buyButtonText}>Comprar</Text>
               </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-1.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Notebook Gamer Acer Nitro V15{"\n"}R$ 5.099,00</Text>
             </View>
-            <TouchableOpacity style={styles.buyButton}>
-                <Text style={styles.buyButtonText}>Comprar</Text>
-              </TouchableOpacity>
           </View>
-        </View>
-
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-3.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Notebook Gamer Dell G15{"\n"}R$ 6.139,00</Text>
-            </View>
-            <TouchableOpacity style={styles.buyButton}>
-                <Text style={styles.buyButtonText}>Comprar</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-4.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Combo Gamer Eg54 Evolut Starter{"\n"}R$ 104,27</Text>
-            </View>
-            <TouchableOpacity style={styles.buyButton}>
-                <Text style={styles.buyButtonText}>Comprar</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
-             
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-11.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Xiaomi 12s Ultra{"\n"}R$ 2.312,00</Text>
-            </View>
-            <TouchableOpacity style={styles.buyButton}>
-                <Text style={styles.buyButtonText}>Comprar</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
-        
-        <View style={styles.productContainer}>
-          <View style={styles.box}>
-            <View style={styles.row}>
-              <Image source={require('./assets/product-14.png')} style={styles.imagem} />
-              <Text style={styles.texto}>Playstation 5 Slim{"\n"}R$ 3.423,00</Text>
-            </View>
-            <TouchableOpacity style={styles.buyButton}>
-                <Text style={styles.buyButtonText}>Comprar</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
+        ))}
       </ScrollView>
     </View>
   );
 }
+
+ {/* Navegação */} 
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Ecommerce App" component={HomeScreen} />
+        <Stack.Screen name="Detalhes" component={ProductDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
 
 // Estilos do aplicativo
 const styles = StyleSheet.create({
