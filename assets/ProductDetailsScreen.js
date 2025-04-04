@@ -41,7 +41,7 @@ export default function ProductDetails({ route, navigation }) {
         />
       </View>
 
-      {/* Picker abaixo do Slider */}
+      {/* Picker */}
       <View style={styles.pickerContainer}>
         <Text style={styles.pickerLabel}>Escolha o tipo de entrega:</Text>
         <Picker
