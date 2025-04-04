@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-const LoginScreen = ({ navigation }) => {
+export default function LoginScreen ({ navigation }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -111,4 +111,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
