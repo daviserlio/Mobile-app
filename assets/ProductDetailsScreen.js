@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 export default function ProductDetails({ route, navigation }) {
   const { product } = route.params;
   const [quantity, setQuantity] = useState(1);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('Normal');
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
