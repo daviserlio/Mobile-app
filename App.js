@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './assets/Login';
 import ProductDetails from './assets/ProductDetailsScreen';
 
 
@@ -19,8 +20,9 @@ function HomeScreen({ navigation }) {
     { name: 'Combo Gamer Eg54 Evolut Starter', price: 'R$ 104,27', image: require('./assets/product-4.png') },
     { name: 'Xiaomi 12s Ultra', price: 'R$ 2.312,00', image: require('./assets/product-11.png') },
     { name: 'Playstation 5 Slim', price: 'R$ 3.423,00', image: require('./assets/product-14.png') },
+    { name: 'Volante Thrustmaster Ferrari 458 Spider Racing', price: 'R$ 1.070,90,', image: require('./assets/product-13.png')},
+    { name: 'Microsoft Xbox Series X 1TB', price: 'R$ 5.170,90,', image: require('./assets/product-12.png')}
   ];
-
   return (
  
     /* Barra de Pesquisa */  
@@ -89,8 +91,9 @@ function HomeScreen({ navigation }) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Ecommerce App" component={HomeScreen} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Principal" component={HomeScreen} />
         <Stack.Screen name="Detalhes" component={ProductDetails} />
       </Stack.Navigator>
     </NavigationContainer>
