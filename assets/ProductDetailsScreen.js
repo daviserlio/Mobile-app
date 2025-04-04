@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 
@@ -9,70 +9,75 @@ export default function ProductDetails({ route, navigation }) {
   const [selectedOption, setSelectedOption] = useState('vermelho');
 
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={product.image} style={styles.image} />
-      </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image source={product.image} style={styles.image} />
+        </View>
 
-      <Text style={styles.title}>{product.name}</Text>
-      <Text style={styles.price}>{product.price}</Text>
+        <Text style={styles.title}>{product.name}</Text>
+        <Text style={styles.price}>{product.price}</Text>
 
-      <Text style={styles.description}>
-        Adquirir este produto é investir em qualidade e performance. 
-        Desenvolvido com tecnologia de ponta, ele oferece excelente desempenho e durabilidade para atender às suas necessidades diárias, seja para uso profissional ou lazer. 
-        Além disso, ao comprar, você conta com um pós-venda dedicado, com suporte técnico eficiente e disponível para solucionar qualquer dúvida ou problema. 
-        Com garantia de 40 anos, você tem total tranquilidade, sabendo que, em caso de defeito, o produto será trocado ou reparado. 
-        Faça a escolha certa e experimente os benefícios de um produto confiável, com suporte contínuo e garantia de satisfação.
-      </Text>
+        <Text style={styles.description}>
+          Adquirir este produto é investir em qualidade e performance. 
+          Desenvolvido com tecnologia de ponta, ele oferece excelente desempenho e durabilidade para atender às suas necessidades diárias, seja para uso profissional ou lazer. 
+          Além disso, ao comprar, você conta com um pós-venda dedicado, com suporte técnico eficiente e disponível para solucionar qualquer dúvida ou problema. 
+          Com garantia de 40 anos, você tem total tranquilidade, sabendo que, em caso de defeito, o produto será trocado ou reparado. 
+          Faça a escolha certa e experimente os benefícios de um produto confiável, com suporte contínuo e garantia de satisfação.
+        </Text>
 
-      {/* Slider de quantidade */}
-      <View style={styles.sliderContainer}>
-        <Text style={styles.sliderLabel}>Quantidade: {quantity}</Text>
-        <Slider
-          style={{ width: '100%', height: 40 }}
-          minimumValue={1}
-          maximumValue={10}
-          step={1}
-          value={quantity}
-          minimumTrackTintColor="#FF6600"
-          maximumTrackTintColor="#999"
-          thumbTintColor="#FF6600"
-          onValueChange={setQuantity}
-        />
-      </View>
+        {/* Slider de quantidade */}
+        <View style={styles.sliderContainer}>
+          <Text style={styles.sliderLabel}>Quantidade: {quantity}</Text>
+          <Slider
+            style={{ width: '100%', height: 40 }}
+            minimumValue={1}
+            maximumValue={10}
+            step={1}
+            value={quantity}
+            minimumTrackTintColor="#FF6600"
+            maximumTrackTintColor="#999"
+            thumbTintColor="#FF6600"
+            onValueChange={setQuantity}
+          />
+        </View>
 
-      {/* Picker */}
-      <View style={styles.pickerContainer}>
-        <Text style={styles.pickerLabel}>Escolha o tipo de entrega:</Text>
-        <Picker
-          selectedValue={selectedOption}
-          onValueChange={(itemValue) => setSelectedOption(itemValue)}
-          style={styles.picker}
+        {/* Picker */}
+        <View style={styles.pickerContainer}>
+          <Text style={styles.pickerLabel}>Escolha o tipo de entrega:</Text>
+          <Picker
+            selectedValue={selectedOption}
+            onValueChange={(itemValue) => setSelectedOption(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Normal" value="Normal" />
+            <Picker.Item label="Rápido" value="Rapido" />
+            <Picker.Item label="Super Rápido" value="Super Rapido" />
+            <Picker.Item label="!!!INSTANTÂNEO!!!!" value="INSTANTANEO" />
+          </Picker>
+        </View>
+
+        <TouchableOpacity
+          style={styles.buyButton}
+          onPress={() =>
+            alert(`Compra de ${quantity} unidade(s) com a entrega ${selectedOption} realizada!`)
+          }
         >
-          <Picker.Item label="Normal" value="Normal" />
-          <Picker.Item label="Rapido" value="Rapido" />
-          <Picker.Item label="Super Rapido" value="Super Rapido" />
-          <Picker.Item label="!!!INSTANTANEO!!!!" value="INSTANTANEO" />
-        </Picker>
+          <Text style={styles.buyButtonText}>Finalizar Compra</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Text style={styles.backButtonText}>Voltar</Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.buyButton}
-        onPress={() =>
-          alert(`Compra de ${quantity} unidade(s) com a entrega ${selectedOption} realizada!`)
-        }
-      >
-        <Text style={styles.buyButtonText}>Finalizar Compra</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>Voltar</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    paddingBottom: 30,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
