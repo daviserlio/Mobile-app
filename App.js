@@ -59,13 +59,14 @@ function HomeScreen({ navigation }) {
         ))}
       </View>
 
-     {/* Box do Banner */} 
+     {/* Box do Banner */}  
+     <ScrollView style={styles.scrollView}>
       <View style={styles.bannerBox}>
         <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
         <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
       </View>
 
-      <ScrollView style={styles.scrollView}>
+     
         {products.map((product, index) => (
           <View key={index} style={styles.productContainer}>
             <View style={styles.box}>
