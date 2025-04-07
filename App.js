@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10, // Espaçamento interno horizontal
     width: '60%', // Ocupa 60% da largura do container
     backgroundColor: '#fff', // Fundo branco
+    fontFamily: 'Inter-Black' 
   },
   categoryContainer: {
     flexDirection: 'row', // Exibe os itens em linha
