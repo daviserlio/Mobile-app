@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './assets/Login';
 import ProductDetails from './assets/ProductDetailsScreen';
 import { Picker } from '@react-native-picker/picker';
+import Slider from '@react-native-community/slider';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,7 @@ function HomeScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('TODOS');
   const [selectedOption, setSelectedOption] = useState('menor');
+  const [quantity, setQuantity] = useState(1);
 
   const products = [
     { name: 'Notebook Dell Inspiron', price: 'R$ 3.899,00', image: require('./assets/product-2.png') },
@@ -63,9 +65,25 @@ function HomeScreen({ navigation }) {
           <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
         </View>
 
+        {/* Slider de quantidade */}
+        <View style={styles.sliderContainer}>
+          <Text style={styles.sliderLabel}>Exibir: {quantity}</Text>
+          <Slider
+            style={{ width: '100%', height: 40 }}
+            minimumValue={1}
+            maximumValue={10}
+            step={1}
+            value={quantity}
+            minimumTrackTintColor="#FF6600"
+            maximumTrackTintColor="#999"
+            thumbTintColor="#FF6600"
+            onValueChange={setQuantity}
+          />
+        </View>
+
         {/* Picker */}
         <View style={styles.pickerContainer}>
-          
+
           <Picker
             selectedValue={selectedOption}
             onValueChange={(itemValue) => setSelectedOption(itemValue)}
@@ -73,7 +91,7 @@ function HomeScreen({ navigation }) {
           >
             <Picker.Item label="Maior preço" value="maior" />
             <Picker.Item label="Menor Preço" value="menor" />
-            
+
           </Picker>
         </View>
 
@@ -205,6 +223,16 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     borderRadius: 5,
+  },
+  sliderContainer: {
+    width: '100%',
+    marginBottom: 10,
+  },
+  sliderLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
   },
   productContainer: {
     marginBottom: 20,
