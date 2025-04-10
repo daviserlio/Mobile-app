@@ -1,56 +1,90 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Switch, } from 'react-native';
 
-export default function LoginScreen ({ navigation,}) {
+export default function LoginScreen({ navigation }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
   const handleLogin = () => {
     navigation.navigate('Principal');
   };
 
+  const themeStyles = darkMode ? darkStyles : lightStyles;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.loginBox}>
-        <Text style={styles.title}>LOGIN DE CLIENTES</Text>
+    <View style={[styles.container, themeStyles.container]}>
+      <View style={[styles.loginBox, themeStyles.loginBox]}>
+        <Text style={[styles.title, themeStyles.text]}>LOGIN DE CLIENTES</Text>
+
         <TextInput
-          style={styles.input}
+          style={[styles.input, themeStyles.input]}
           placeholder="Seu Nome Completo"
+          placeholderTextColor={darkMode ? '#ccc' : '#666'}
           value={firstName}
           onChangeText={setFirstName}
         />
+
         <TextInput
-          style={styles.input}
+          style={[styles.input, themeStyles.input]}
           placeholder="Seu E-mail"
+          placeholderTextColor={darkMode ? '#ccc' : '#666'}
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
         />
+
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
+
         <View style={styles.rememberContainer}>
           <TouchableOpacity onPress={() => setRememberMe(!rememberMe)}>
-            <Text style={styles.rememberText}>{rememberMe ? '☑' : '☐'} Esqueçeu a Senha?</Text>
+            <Text style={themeStyles.text}>
+              {rememberMe ? '☑' : '☐'} Esqueceu a Senha?
+            </Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.switchRow}>
+          <Text style={themeStyles.text}>Modo Escuro</Text>
+          <Switch
+            value={darkMode}
+            onValueChange={setDarkMode}
+            thumbColor={darkMode ? '#FF6600' : '#ccc'}
+            trackColor={{ false: '#999', true: '#FF6600' }}
+          />
+        </View>
+
+        <View style={styles.switchRow}>
+          <Text style={themeStyles.text}>Notificações</Text>
+          <Switch
+            value={notificationsEnabled}
+            onValueChange={setNotificationsEnabled}
+            thumbColor={notificationsEnabled ? '#FF6600' : '#ccc'}
+            trackColor={{ false: '#999', true: '#FF6600' }}
+          />
+        </View>
+
         <View style={styles.separator} />
-        <Text style={styles.signupText}>Não é cliente? <Text style={styles.signupLink}>CRIAR CONTA!</Text></Text>
+
+        <Text style={themeStyles.text}>
+          Não é cliente? <Text style={styles.signupLink}>CRIAR CONTA!</Text>
+        </Text>
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
   },
   loginBox: {
-    backgroundColor: '#333',
     padding: 20,
     borderRadius: 10,
     width: '80%',
@@ -62,14 +96,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   input: {
-    backgroundColor: '#555',
-    color: 'white',
     width: '100%',
     padding: 10,
     marginVertical: 5,
@@ -88,13 +119,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   rememberContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    width: '100%',
     marginVertical: 10,
   },
-  rememberText: {
-    color: 'white',
+  switchRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginVertical: 5,
   },
   separator: {
     height: 1,
@@ -102,12 +136,42 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
   },
-  signupText: {
-    color: 'white',
-  },
   signupLink: {
     color: '#FF6600',
     fontWeight: 'bold',
   },
 });
 
+// Estilos claros
+const lightStyles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f0f0f0',
+  },
+  loginBox: {
+    backgroundColor: '#fff',
+  },
+  input: {
+    backgroundColor: '#eee',
+    color: '#000',
+  },
+  text: {
+    color: '#000',
+  },
+});
+
+// Estilos escuros
+const darkStyles = StyleSheet.create({
+  container: {
+    backgroundColor: '#121212',
+  },
+  loginBox: {
+    backgroundColor: '#333',
+  },
+  input: {
+    backgroundColor: '#555',
+    color: '#fff',
+  },
+  text: {
+    color: '#fff',
+  },
+});
