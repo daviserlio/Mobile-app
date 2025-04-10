@@ -59,8 +59,8 @@ function HomeScreen({ navigation }) {
         ))}
       </View>
 
-     {/* Box do Banner */}  
-     <ScrollView style={styles.scrollView}>
+     {/* Box do Banner */} 
+     <ScrollView style={styles.scrollView}> 
       <View style={styles.bannerBox}>
         <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
         <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
