@@ -64,14 +64,18 @@ function HomeScreen({ navigation }) {
         </View>
 
         {/* Picker */}
-        <Picker
-          selectedValue={selectedOption}
-          onValueChange={(itemValue) => setSelectedOption(itemValue)}
-          style={styles.picker}
-        >
-          <Picker.Item label="Menor Preço" value="menor" />
-          <Picker.Item label="Maior Preço" value="maior" />
-        </Picker>
+        <View style={styles.pickerContainer}>
+          
+          <Picker
+            selectedValue={selectedOption}
+            onValueChange={(itemValue) => setSelectedOption(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Maior preço" value="maior" />
+            <Picker.Item label="Menor Preço" value="menor" />
+            
+          </Picker>
+        </View>
 
         {products.map((product, index) => (
           <View key={index} style={styles.productContainer}>
@@ -188,39 +192,19 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-  },
-  sortPickerContainer: {
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
+    marginBottom: 20,
   },
   pickerLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 5,
+    color: '#333',
   },
   picker: {
-    height: 40,
+    height: 50,
     width: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 5,
   },
   productContainer: {
     marginBottom: 20,
