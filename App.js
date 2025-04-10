@@ -4,15 +4,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './assets/Login';
 import ProductDetails from './assets/ProductDetailsScreen';
-
+import { Picker } from '@react-native-picker/picker';
 
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('TODOS');
+  const [selectedOption, setSelectedOption] = useState('menor');
 
-  {/* Lista de Produtos */}
   const products = [
     { name: 'Notebook Dell Inspiron', price: 'R$ 3.899,00', image: require('./assets/product-2.png') },
     { name: 'Notebook Gamer Acer Nitro V15', price: 'R$ 5.099,00', image: require('./assets/product-1.png') },
@@ -20,12 +20,11 @@ function HomeScreen({ navigation }) {
     { name: 'Combo Gamer Eg54 Evolut Starter', price: 'R$ 104,27', image: require('./assets/product-4.png') },
     { name: 'Xiaomi 12s Ultra', price: 'R$ 2.312,00', image: require('./assets/product-11.png') },
     { name: 'Playstation 5 Slim', price: 'R$ 3.423,00', image: require('./assets/product-14.png') },
-    { name: 'Volante Thrustmaster Ferrari 458 Spider Racing', price: 'R$ 1.070,90,', image: require('./assets/product-13.png')},
-    { name: 'Microsoft Xbox Series X 1TB', price: 'R$ 5.170,90,', image: require('./assets/product-12.png')}
+    { name: 'Volante Thrustmaster Ferrari 458 Spider Racing', price: 'R$ 1.070,90', image: require('./assets/product-13.png') },
+    { name: 'Microsoft Xbox Series X 1TB', price: 'R$ 5.170,90', image: require('./assets/product-12.png') }
   ];
+
   return (
- 
-    /* Barra de Pesquisa */  
     <View style={styles.container}>
       <View style={styles.header}>
         <TextInput
@@ -36,7 +35,6 @@ function HomeScreen({ navigation }) {
         />
       </View>
 
-      {/* Barra de Categorias */}
       <View style={styles.categoryContainer}>
         {['TODOS', 'CELULARES', 'ÁUDIO', 'COMPUTADORES', 'GAMES', 'TV'].map((category) => (
           <TouchableOpacity
@@ -59,14 +57,22 @@ function HomeScreen({ navigation }) {
         ))}
       </View>
 
-     {/* Box do Banner */} 
-     <ScrollView style={styles.scrollView}> 
-      <View style={styles.bannerBox}>
-        <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
-        <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
-      </View>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.bannerBox}>
+          <Image source={require('./assets/Cupom.webp')} style={styles.banner} />
+          <Text style={styles.bannerText}>Quinzena do Consumidor - Última Chance!</Text>
+        </View>
 
-     
+        {/* Picker */}
+        <Picker
+          selectedValue={selectedOption}
+          onValueChange={(itemValue) => setSelectedOption(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Menor Preço" value="menor" />
+          <Picker.Item label="Maior Preço" value="maior" />
+        </Picker>
+
         {products.map((product, index) => (
           <View key={index} style={styles.productContainer}>
             <View style={styles.box}>
@@ -88,7 +94,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
- {/* Navegação */} 
 export default function App() {
   return (
     <NavigationContainer>
@@ -101,130 +106,163 @@ export default function App() {
   );
 }
 
-
-// Estilos do aplicativo
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Ocupa todo o espaço disponível
-    alignItems: 'center', // Alinha os itens ao centro horizontalmente
-    padding: 20, // Adiciona espaçamento interno de 20 pixels
-    backgroundColor: '#f0f0f0', // Define a cor de fundo do app
-    justifyContent: 'flex-start', // Alinha os itens ao início do eixo principal (vertical)
+    flex: 1,
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'flex-start',
   },
   header: {
-    flexDirection: 'row', // Organiza os elementos em linha
-    justifyContent: 'space-between', // Distribui os elementos uniformemente ao longo do eixo horizontal
-    alignItems: 'center', // Centraliza os itens verticalmente
-    width: '100%', // Ocupa toda a largura disponível
-    marginBottom: 10, // Espaçamento inferior de 10 pixels
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 10,
   },
   searchInput: {
-    height: 40, // Altura do campo de busca
-    borderColor: '#ccc', // Cor da borda
-    borderWidth: 1, // Largura da borda de 1 pixel
-    borderRadius: 5, // Borda arredondada
-    paddingHorizontal: 10, // Espaçamento interno horizontal
-    width: '60%', // Ocupa 60% da largura do container
-    backgroundColor: '#fff', // Fundo branco
-    fontFamily: 'Inter-Black' 
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    width: '60%',
+    backgroundColor: '#fff',
+    fontFamily: 'Inter-Black',
   },
   categoryContainer: {
-    flexDirection: 'row', // Exibe os itens em linha
-    justifyContent: 'center', // Centraliza os itens
-    width: '100%', // Ocupa toda a largura disponível
-    marginBottom: 10, // Espaçamento inferior
-    flexWrap: 'wrap', // Permite que os itens quebrem linha se necessário
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    marginBottom: 10,
+    flexWrap: 'wrap',
   },
   categoryButton: {
-    borderWidth: 2, // Define a largura da borda
-    borderColor: '#FF6600', // Cor da borda
-    borderRadius: 10, // Arredondamento da borda
-    paddingVertical: 8, // Espaçamento vertical interno
-    paddingHorizontal: 12, // Espaçamento horizontal interno
-    marginHorizontal: 5, // Espaçamento lateral entre os botões
-    marginBottom: 5, // Espaçamento inferior entre as linhas de botões
+    borderWidth: 2,
+    borderColor: '#FF6600',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+    marginBottom: 5,
   },
   categoryText: {
-    color: '#FF6600', // Cor do texto dos botões de categoria
-    fontWeight: 'bold', // Define a fonte como negrito
+    color: '#FF6600',
+    fontWeight: 'bold',
   },
   selectedCategory: {
-    backgroundColor: '#FF6600', // Define o fundo laranja para categoria selecionada
+    backgroundColor: '#FF6600',
   },
   selectedCategoryText: {
-    color: '#FFFFFF', // Define a cor do texto branco para categoria selecionada
+    color: '#FFFFFF',
   },
   bannerBox: {
-    backgroundColor: '#fff', // Fundo branco para o banner
-    borderRadius: 10, // Arredondamento da borda do banner
-    padding: 10, // Espaçamento interno
-    width: '100%', // Ocupa toda a largura disponível
-    alignItems: 'center', // Centraliza os itens horizontalmente
-    marginBottom: 15, // Espaçamento inferior
-    shadowColor: '#000', // Cor da sombra
-    shadowOffset: { width: 0, height: 2 }, // Posição da sombra
-    shadowOpacity: 0.2, // Opacidade da sombra
-    shadowRadius: 4, // Raio de difusão da sombra
-    elevation: 5, // Elevação para Android (sombra)
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
   banner: {
-    width: '100%', // Ocupa toda a largura disponível
-    height: 150, // Define a altura do banner
-    resizeMode: 'cover', // Ajusta a imagem para cobrir o espaço
-    borderRadius: 10, // Borda arredondada
+    width: '100%',
+    height: 150,
+    resizeMode: 'cover',
+    borderRadius: 10,
   },
   bannerText: {
-    fontSize: 18, // Tamanho da fonte
-    fontWeight: 'bold', // Texto em negrito
-    color: '#333', // Cor do texto
-    marginTop: 5, // Espaçamento superior
-    textAlign: 'center', // Centraliza o texto
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginTop: 5,
+    textAlign: 'center',
   },
   scrollView: {
-    width: '100%', // Ocupa toda a largura disponível
+    width: '100%',
+  },
+  pickerContainer: {
+    width: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  sortPickerContainer: {
+    width: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  pickerLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  picker: {
+    height: 40,
+    width: '100%',
   },
   productContainer: {
-    marginBottom: 20, // Espaçamento inferior entre os produtos
-    alignItems: 'flex-start', // Alinha os itens à esquerda
+    marginBottom: 20,
+    alignItems: 'flex-start',
   },
   box: {
-    backgroundColor: '#fff', // Fundo branco do box do produto
-    borderRadius: 10, // Borda arredondada
-    padding: 15, // Espaçamento interno
-    shadowColor: '#000', // Cor da sombra
-    shadowOffset: { width: 0, height: 2 }, // Posição da sombra
-    shadowOpacity: 0.2, // Opacidade da sombra
-    shadowRadius: 4, // Raio de difusão da sombra
-    elevation: 5, // Elevação para Android (sombra)
-    width: '100%', // Ocupa toda a largura disponível
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '100%',
   },
   row: {
-    flexDirection: 'row', // Alinha os elementos em linha
-    alignItems: 'center', // Centraliza os elementos verticalmente
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   imagem: {
-    width: 100, // Define a largura da imagem
-    height: 100, // Define a altura da imagem
-    borderRadius: 10, // Arredonda os cantos da imagem
+    width: 100,
+    height: 100,
+    borderRadius: 10,
   },
   texto: {
-    marginLeft: 10, // Adiciona um espaçamento à esquerda do texto
-    fontSize: 16, // Tamanho da fonte
-    fontWeight: 'bold', // // Texto em negrito
+    marginLeft: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   buyButton: {
-    borderWidth: 2, // Define a largura da borda do botão
-    borderColor: '#FF6600', // Define a cor da borda do botão
-    borderRadius: 10, // Arredonda os cantos do botão com um raio
-    paddingVertical: 8, // Adiciona um espaçamento interno na parte superior e inferior
-    paddingHorizontal: 12, // Adiciona um espaçamento interno na lateral
-    marginTop: 10, // Adiciona uma margem superior para espaçar o botão de outros elementos acima dele.
-    alignItems: 'center', // Centraliza o conteúdo horizontalmente dentro do botão.
-    backgroundColor: '#FF6600', // Define a cor de fundo do botão
+    borderWidth: 2,
+    borderColor: '#FF6600',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginTop: 10,
+    alignItems: 'center',
+    backgroundColor: '#FF6600',
   },
   buyButtonText: {
-    color: '#FFFFFF', // Define a cor do texto 
-    fontWeight: 'bold', // Deixa o texto em negrito.
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
 });
-
