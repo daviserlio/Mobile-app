@@ -83,7 +83,6 @@ function HomeScreen({ navigation }) {
 
         {/* Picker */}
         <View style={styles.pickerContainer}>
-
           <Picker
             selectedValue={selectedOption}
             onValueChange={(itemValue) => setSelectedOption(itemValue)}
@@ -91,7 +90,6 @@ function HomeScreen({ navigation }) {
           >
             <Picker.Item label="Maior preço" value="maior" />
             <Picker.Item label="Menor Preço" value="menor" />
-
           </Picker>
         </View>
 
